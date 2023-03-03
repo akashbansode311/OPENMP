@@ -1,0 +1,22 @@
+#include<stdio.h>
+#define N 20
+#include<omp.h>
+
+int main()
+{
+    omp_set_num_threads(5);
+    int i;
+    printf("Before passing Chunk Size...\n");
+    #pragma omp parallel for schedule(static)
+    for(i=0;i<N;i++)
+    {
+        printf("Thread = %d ==> Hiii = %d\n",omp_get_thread_num(),i);
+    }
+    printf("After passing Chunk Size = 3\n");
+    #pragma omp parallel for schedule(static,3)
+    for(i=0;i<N;i++)
+    {
+        printf("Thread = %d ==> Hiii = %d\n",omp_get_thread_num(),i);
+    }
+
+}
